@@ -1,0 +1,107 @@
+<!-- Estendendo o template 'base.html' para que carregue apenas o conteúdo de 'changenoun.html' -->
+{% extends "base.html" %}
+
+{% block main %}
+{% load static %}
+    <section>
+    <!-- Bloco em que serão apresentados os poemas -->
+        <div class="main-block">
+        <!-- Formulário em que será apresentado o primeiro poema -->
+            <form class="fpoem" method="POST" enctype="multipart/form-data">
+            <!-- Carrega o csrf_token para garantir a segurança do envio dos forms -->
+            {% csrf_token %}
+            <!-- Apresentar opção de enviar arquivo apenas se o usuário estiver autenticado -->
+                <div style="margin-bottom: 10px">
+                    <input type="file" class="myFile" name="myfile" {% if user.is_authenticated %} style="visibility: show" {% else %} style="visibility: hidden" {% endif %}>
+                </div>
+                <!-- 
+                    Apresenta como entradas em um select drop down os nomes dos generos cadastrados no banco de dados, 
+                    a partir da variável passada por contexto chamada de 'gender'.
+                -->
+                <select name="item_id1">
+                    {% for entry in gender %}
+                        <option value="{{ entry.id }}">{{ entry.nome_genero }}</option>
+                    {% endfor %}
+                </select>
+                <!-- 
+                    Div em que o poema será apresentado.
+                    Na div serão carregadas cada uma das posições do vetor 'content' como cada verso do poema.
+                -->
+                <div class="poem" id="test">
+                {% for c in content %}
+                    <p>{{ c }}<p>
+                {% endfor %}
+                </div>
+                <!-- Botão para gerar o poema -->
+                <div class="poem-btn">
+                    <button class="generatorbtn" name="generatorbtn">Gerar Poema</button>
+                </div>
+            </form>
+            <!-- 
+                Form para apresentar o segundo poema (primeiro poema com substantivos trocados).
+                A estrutura deste form é a mesma que a do primeiro.
+            -->
+
+            <form class="spoem" method="POST">
+            {% csrf_token %}
+                <div style="margin-bottom: 10px">
+                    <input type="file" class="myFile"  name="myfile2" {% if user.is_authenticated %} style="visibility: show" {% else %} style="visibility: hidden" {% endif %}>
+                </div>
+                <select name="item_id2">
+                    {% for entry in gender %}
+                        <option value="{{ entry.id }}">{{ entry.nome_genero }}</option>
+                    {% endfor %}
+                </select>
+                <div class="poem">
+                    {% for c in changed %}
+                        <p>{{c}}</p>
+                    {% endfor %}
+                </div>
+                <div class="poem-btn">
+                <!-- Botão para trocar os substantivos do poema -->
+                    <button class="changebtn" name="changebtn">Trocar Substantivos</button>
+                <!-- 
+                    Verifica se o a variável quiz tem como conteúdo 1,
+                    Se for 1, apresenta o botão para avaliar o poema (só ocorre se for feita uma troca de substantivos)
+                    Se não for 1 (neste caso, 0) o botão continuará escondido.
+                -->
+                    {% if quiz == 1 %}
+                    <input type="button" class="quizbtn" onclick="document.getElementById('quiz').style.display='block'" value="Avaliar Poema">
+                    {% endif %}
+                </div>
+            </form>
+            {% if user.is_authenticated %}
+                <p><h5>*Arquivos enviados devem ser de extensão ".txt"</h5></p>
+            {% endif%}
+        </div>
+        
+        <!-- O Modal -->
+        <div id="quiz" class="modal">
+            <!-- Conteúdo do Modal -->
+            <form class="modal-content animate" method="POST">
+                <div class="quiz">
+                    <span class="quizSpan">Questionário</span>
+                    <!-- Definição do botão em formato de 'X' para fechar o modal -->
+                    <span onclick="document.getElementById('quiz').style.display='none'" class="close" title="Close Modal">&times;</span>
+                </div>
+
+                <div class="container">
+                <!-- 
+                    Carrega todos os campso do form 'QuizForm' colocado na variável 'quizForm', 
+                    passada pelo contexto da view 'changenoun' 
+                -->
+                    {% csrf_token %}
+                    {% for field in quizForm %}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    {% endfor %}
+                    <!-- Botão para cancelar o envio do formulário (Fecha o modal) -->                              
+                    <button type="button" onclick="document.getElementById('quiz').style.display='none'" class="cancelbtn" name="cancelbtn">Cancel</button>
+                    <!-- Botão para enviar o formulário -->
+                    <button type="submit" onclick="document.getElementById('quiz').style.display='none'" class="sendbtn" name="sendbtn">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </section>
+{% endblock %}

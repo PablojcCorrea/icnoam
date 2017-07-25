@@ -1,0 +1,348 @@
+/* Estilo CSS padrão */
+* {
+    margin:0;
+    padding: 0;
+    
+    font-family: sans-serif;
+}
+
+body {
+    min-width: 800px;
+}
+
+/* Estilo CSS dos elementos do Header */
+header {
+    background: black;
+    color:white;
+    display: inline-flex;
+    width: 100%;
+}
+
+.logo {
+    display: inline-flex;
+    flex-flow: row;
+}
+
+header img {
+    height: 5em;
+    width: 5em;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+
+.button {
+    background-color: rgb(255, 255, 255);
+    
+    display: inline-block;
+    margin: 0 auto;
+    
+    width: 120px;
+    height: 30px;
+    border-radius: 10px;
+    
+    font-size: 18px;
+    line-height: 30px;
+    color: black;
+    
+    text-decoration: none
+}
+
+/* Estilo CSS dos botões do Header */
+.header-button {
+    display: inline-flex;
+    flex-flow: column;
+    margin: 0.5em 1em 0.5em auto;
+    text-align: center;
+}
+.header-button .button:hover {
+    transition: 200ms;
+    background-color: rgba(240, 248, 255, .9);
+}
+    
+.header-button .button {
+    margin: 0.2em;
+    
+}
+
+/* 
+    Estilo CSS dos elementos presentes na área de conteúdo 
+    Que incluem o menu de navegação e o bloco principal de conteúdo
+*/
+
+.content {
+    height: 510px;
+}
+
+/* Menu de Navegação */
+.menu ul {
+    list-style-type: none;
+}
+
+.menu ul a {
+    background-color: lightgrey;
+    
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    
+    width: 100%;
+    height: 30px;
+    
+    font-size: 15px;
+    line-height: 30px;
+    color: black;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    transition: 200ms;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.menu {
+	background-color: lightgrey;
+    display: block;
+    float: left;
+    text-align: center;
+    width: 12em;
+    height: 100%;
+}
+
+/* Bloco principal */
+.main {
+    height: 100%;
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    float: left;
+}
+
+.main .main-block{
+    height: 100%;
+    width: 100%;
+    margin: 20px;
+    float: left;
+}
+
+/* CSS do footer */
+footer {
+    background: gray;
+    color:white;
+    display: block;
+    float: none;
+    margin-top: 0px;
+    height: 55px;
+    
+    text-align: center;
+}
+
+/* CSS dos elementos presentes nos formulários de Login e Cadastros*/
+
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.signupbtn, .loginbtn  {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* CSS do Bloco Principal de Conteúdo */
+.main-block .lblcadastrar {
+    padding: 10px;
+    width: 400px;
+    margin: auto;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+.container .imgcontainer {
+    text-align: center;
+}
+
+.main-block .fpoem, .spoem {
+    float: left;
+    width: 45%;
+    margin: 10px;
+}
+
+.main-block select {
+    width: 100%
+}
+
+.main-block .poem {
+    margin-top: 10px;
+    height: 300px;
+    border: 2px solid;
+    text-align: left;
+    padding: 10px;
+    padding-top: 50px;
+}
+
+.poem-btn {
+    text-align: left;
+}
+
+.poem-btn .quizbtn {
+    float: right;
+}
+
+.generatorbtn, .changebtn {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    color: black;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 1px;
+    text-decoration: none;
+}
+
+/* CSS do Modal em que o formulário é apresentado */
+.main-block .container {
+    padding: 20px;
+    width: 400px;
+    margin: auto;
+    
+}
+
+/* Espaçamento das respostas */
+#id_primeiraresposta_questionario, #id_segundaresposta_questionario, #id_terceiraresposta_questionario, #id_quartaresposta_questionario {
+    padding-bottom: 15px;
+    margin-left: 15px;
+    list-style-type: none;
+}
+
+.modal {
+    display: none; /* Por padrão: Escondido; */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Pra ficar no top*/
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Permitir scroll se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Black com opacity */
+    padding-top: 20px;
+    padding-left: 20%;
+}
+
+/* Caixa de conteúdo do modal*/
+.modal-content {
+    background-color: #fefefe;
+    margin:  auto 20% auto; /* 5% do top, 15% do bottom and centralizado */
+    border: 1px solid #888;
+    width: 400px;
+    padding: 20px;
+}
+
+/* Botão de Fechar (x) */
+.close {
+    margin-right: 0px;
+    margin-left: 60%;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+.modal .quiz {
+    width: 100%;
+    flex-flow: inline;
+}
+
+.modal .quizSpan {
+    font-size: 20px
+}
+
+.modal button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: auto%;
+}
+.modal .cancelbtn {
+    width: ;
+    background-color: #f44336;
+    float: right;
+}
+
+.modal .question {
+    margin: 10px;
+    padding: 5px;
+}
+
+.modal input {
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.modal #inputconstraint, #inputsyntax {
+    width: 300px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* Adição de animação de Zoom */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+/* Muda o stilo dos botões de fechar e cancelar em telas menores */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}

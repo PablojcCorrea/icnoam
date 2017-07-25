@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block main %}
+                <section>
+                {% load static %}
+                   <div class="main-block">
+                        <form style="border:1px solid #ccc" class="container" method="post">
+                        {% csrf_token %}
+                            <div>
+                                <div class="imgcontainer">
+                                    <img src="{% static 'assets/img/logo.png' %}" alt="Logo" style="height: 100px">
+                                </div>                   
+                                          
+                                <label><b>Nome de Usuário</b></label>
+                                <input type="text" placeholder="Insira um nome de usuário" name="username" required>
+
+                                <label><b>Senha</b></label>
+                                <input type="password" placeholder="Informe sua senha" name="password" id="psw" required>
+                                
+                                {{ form.non_field_errors }}
+
+                                <div class="clearfix">
+                                    <button type="submit" class="loginbtn">Acessar</button>
+                                </div>
+                                
+                                <p><a href="#" class="fgt-psw">Forgot Password?</a></p>
+                            </div>
+                        </form>
+                   </div>
+                </section>
+{% endblock %}

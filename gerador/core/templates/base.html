@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+    <!-- Importação de arquivos necessários -->
+        <meta charset="utf-8">
+        <title>Projeto noam</title>
+        <link type="text/css" rel="stylesheet" href="{% static 'assets/css/style_v1.css' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    
+    <body>
+        <header>
+        <!-- Definição da imagem de logo e e o título presente no cabeçalho -->
+            <div class="logo">
+                <img src="{% static 'assets/img/logo.png' %}" alt="Logo">
+                <h1>Gerador de Poemas</h1>
+            </div>
+        <!-- 
+            Definição dos botões do cabeçalho
+            Se o usuário não estiver autenticado, apresenta o botão para cadastrar e para entrar no sistema
+            Se o usuário estiver autenticado, apresenta o botão para o perfil e para sair do sistema
+         -->
+            <div class="header-button">
+                {% if user.is_authenticated %}
+                    <a href="#" class="button">Perfil</a>
+                {% else %}
+                    <a href="{% url 'register' %}" class="button">Cadastrar</a>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}" class="button">Sair</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="button">Entrar</a>
+                {% endif %}
+            </div>
+        </header>
+        <div class="content">
+            <!-- Definição do menu que de navegação das páginas do sistema -->
+            <nav class="menu">
+                <div class="div-menu">
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">Sobre o Projeto</a></li>
+                    </ul>
+                    <hr>
+                    <ul>
+                        <li><a href="{% url 'changenoun' %}">Troca de Substantivos</a></li>
+                        <li><a href="{% url 'nplusseven' %}">Restrição N + 7</a></li>
+                        <li><a href="{% url 'snowball' %}">Bola de Neve</a></li>
+                        <li><a href="{% url 'queneau' %}">Queneau</a></li>
+                        <li><a href="{% url 'abc' %}">Abecedário</a></li>
+                        <li><a href="{% url 'acronym' %}">Acrônimo</a></li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="main">
+            <!-- Definição do bloco de conteúdo em que serão carregadas as demais páginas -->
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+        <!-- Definição do conteúdo do rodapé -->
+        <footer>
+            <p>Informações e contatos.</p>
+            <a href="mailto:">Contate-nos</a>
+        </footer>
+    </body>
+</html>
